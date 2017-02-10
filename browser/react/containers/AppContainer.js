@@ -10,7 +10,8 @@ import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
 import store from '../store';
-import {play, pause, load, startSong, toggle, toggleOne, next, prev, setProgress} from '../action-creators/player'
+import {play, pause, load, startSong, toggle, toggleOne, next, prev, setProgress, addListeners} from '../action-creators/player'
+import {fetchAlbum} from '../action-creators/album'
 
 import { convertAlbum, convertAlbums, convertSong, skip } from '../utils';
 
@@ -50,10 +51,7 @@ export default class AppContainer extends Component {
       .then(res => res.map(r => r.data))
       .then(data => this.onLoad(...data));
 
-    AUDIO.addEventListener('ended', () =>
-      this.next());
-    AUDIO.addEventListener('timeupdate', () =>
-      this.setProgress(AUDIO.currentTime / AUDIO.duration));
+    store.dispatch(addListeners())
   }
 
   onLoad (albums, artists, playlists) {
@@ -101,11 +99,7 @@ export default class AppContainer extends Component {
   }
 
   selectAlbum (albumId) {
-    axios.get(`/api/albums/${albumId}`)
-      .then(res => res.data)
-      .then(album => this.setState({
-        selectedAlbum: convertAlbum(album)
-      }));
+    store.dispatch(fetchAlbum(albumId));
   }
 
   selectArtist (artistId) {
@@ -192,7 +186,7 @@ export default class AppContainer extends Component {
       loadSongs: this.loadSongs,
       addSongToPlaylist: this.addSongToPlaylist
     });
-    console.log(this.state);
+    console.log('---------props----------',props)
     return (
       <div id="main" className="container-fluid">
         <div className="col-xs-2">

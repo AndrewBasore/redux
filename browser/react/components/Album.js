@@ -11,12 +11,12 @@ class Album extends React.Component {
   }
 
   render () {
-    const album = this.props.selectedAlbum;
+    const album = this.props.album.selectedAlbum;
     const currentSong = this.props.player.currentSong;
     const isPlaying = this.props.player.isPlaying;
     const toggleOne = this.props.toggleOne;
 
-    console.log("This is the  props of the album we're rendinger! ", this.props.player.currentSong);
+    console.log("This is the  props of the album we're rendinger! ", this.props);
 
     return (
       <div className="album">

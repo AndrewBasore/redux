@@ -98,3 +98,12 @@ export const prev = function(){
 		dispatch(startSong(...skip(-1, player)));
 	}
 }
+
+export const addListeners = function(){
+	return function(dispatch){
+		AUDIO.addEventListener('ended', () =>
+      dispatch(next()));
+    AUDIO.addEventListener('timeupdate', () =>
+      dispatch(setProgress(AUDIO.currentTime / AUDIO.duration)));
+	}
+}
