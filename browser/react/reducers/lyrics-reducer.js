@@ -5,7 +5,7 @@ const initialState = {
 	lyric: ''
 }
 
-const reducer = function(prevState = initialState, action){
+export default function(prevState = initialState, action){
 
 	switch(action.type){
 		case SET_LYRICS:
@@ -17,4 +17,4 @@ const reducer = function(prevState = initialState, action){
 
 }
 
-export default reducer;
+

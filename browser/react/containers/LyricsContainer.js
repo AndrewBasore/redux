@@ -43,7 +43,7 @@ export default class LyricsContainer extends Component{
     const propsToSend = {
       artistQuery: this.state.artistQuery,
       songQuery: this.state.songQuery,
-      lyrics: this.state.lyric,
+      lyrics: this.state.lyrics.lyric,
       setArtist: this.setArtist,
       setSong: this.setSong,
       handleSubmit: this.handleSubmit

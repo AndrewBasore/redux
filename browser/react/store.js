@@ -1,8 +1,12 @@
-import {createStore, applyMiddleware} from 'redux'
-import reducer from './reducers/root-reducer.js'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
+import lyricsReducer from './reducers/lyrics-reducer.js'
+import playerReducer from './reducers/player-reducer.js'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
-export default createStore(reducer, applyMiddleware(createLogger(), thunkMiddleware));
+export default createStore(combineReducers({
+  lyrics: lyricsReducer,
+  player: playerReducer
+}), applyMiddleware(createLogger(), thunkMiddleware));
 
 
